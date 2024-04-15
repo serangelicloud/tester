@@ -9,7 +9,6 @@ import (
 
 type output struct {
 	TestType      string
-	TestPosition  int
 	ActualValue   interface{}
 	ExpectedValue interface{}
 	TestLine      int
@@ -33,7 +32,6 @@ func TestEqual(actual interface{}, expected interface{}, request string) bool {
 	if actual == expected {
 		result := output{
 			TestType:      "test for Equality",
-			TestPosition:  0, // You might want to pass this as an argument or calculate it dynamically
 			ActualValue:   actual,
 			ExpectedValue: expected,
 			TestLine:      line,
@@ -45,7 +43,6 @@ func TestEqual(actual interface{}, expected interface{}, request string) bool {
 	} else {
 		result := output{
 			TestType:      "test for Equality",
-			TestPosition:  0, // You might want to pass this as an argument or calculate it dynamically
 			ActualValue:   actual,
 			ExpectedValue: expected,
 			TestLine:      line,
@@ -62,7 +59,6 @@ func TestDifferent(actual interface{}, expected interface{}, request string) boo
 	if actual != expected {
 		result := output{
 			TestType:      "test for difference",
-			TestPosition:  0, // You might want to pass this as an argument or calculate it dynamically
 			ActualValue:   actual,
 			ExpectedValue: expected,
 			TestLine:      line,
@@ -74,7 +70,6 @@ func TestDifferent(actual interface{}, expected interface{}, request string) boo
 	} else {
 		result := output{
 			TestType:      "test for differences",
-			TestPosition:  0, // You might want to pass this as an argument or calculate it dynamically
 			ActualValue:   actual,
 			ExpectedValue: expected,
 			TestLine:      line,
@@ -90,7 +85,6 @@ func TestNil(actual interface{}, request string) bool {
 	if actual == nil {
 		result := output{
 			TestType:      "test for Nil return",
-			TestPosition:  0, // You might want to pass this as an argument or calculate it dynamically
 			ActualValue:   actual,
 			ExpectedValue: nil,
 			TestLine:      line,
@@ -102,7 +96,6 @@ func TestNil(actual interface{}, request string) bool {
 	} else {
 		result := output{
 			TestType:      "test for nil return",
-			TestPosition:  0, // You might want to pass this as an argument or calculate it dynamically
 			ActualValue:   actual,
 			ExpectedValue: nil,
 			TestLine:      line,
@@ -118,7 +111,6 @@ func TestNotNil(actual interface{}, request string) bool {
 	if actual != nil {
 		result := output{
 			TestType:      "test for not nill",
-			TestPosition:  0, // You might want to pass this as an argument or calculate it dynamically
 			ActualValue:   actual,
 			ExpectedValue: "not nil",
 			TestLine:      line,
@@ -145,7 +137,6 @@ func TestCheckReturnType(actual interface{}, expected interface{}, request strin
 	if reflect.TypeOf(actual).String() == expected {
 		result := output{
 			TestType:      "test for matching return types",
-			TestPosition:  0, // You might want to pass this as an argument or calculate it dynamically
 			ActualValue:   reflect.TypeOf(actual).String(),
 			ExpectedValue: expected,
 			TestLine:      line,
@@ -157,7 +148,6 @@ func TestCheckReturnType(actual interface{}, expected interface{}, request strin
 	} else {
 		result := output{
 			TestType:      "test for matching return types",
-			TestPosition:  0, // You might want to pass this as an argument or calculate it dynamically
 			ActualValue:   reflect.TypeOf(actual).String(),
 			ExpectedValue: expected,
 			TestLine:      line,
