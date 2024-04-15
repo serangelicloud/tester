@@ -7,6 +7,7 @@ import (
 	"runtime"
 )
 
+var RunTests = true // export variables
 type output struct {
 	TestType      string
 	ActualValue   interface{}
@@ -28,133 +29,153 @@ const (
 )
 
 func TestEqual(actual interface{}, expected interface{}, request string) bool {
-	_, filePath, line, _ := runtime.Caller(1)
-	if actual == expected {
-		result := output{
-			TestType:      "test for Equality",
-			ActualValue:   actual,
-			ExpectedValue: expected,
-			TestLine:      line,
-			filePath:      filePath,
+	if RunTests {
+		_, filePath, line, _ := runtime.Caller(1)
+		if actual == expected {
+			result := output{
+				TestType:      "test for Equality",
+				ActualValue:   actual,
+				ExpectedValue: expected,
+				TestLine:      line,
+				filePath:      filePath,
+			}
+			OutputString := fmt.Sprintf("%sTest Passed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorGreen, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
+			fmt.Println(OutputString)
+			return true
+		} else {
+			result := output{
+				TestType:      "test for Equality",
+				ActualValue:   actual,
+				ExpectedValue: expected,
+				TestLine:      line,
+				filePath:      filePath,
+			}
+			OutputString := fmt.Sprintf("%sTest Failed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorRed, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
+			fmt.Println(OutputString)
+			return false
 		}
-		OutputString := fmt.Sprintf("%sTest Passed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorGreen, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
-		fmt.Println(OutputString)
-		return true
 	} else {
-		result := output{
-			TestType:      "test for Equality",
-			ActualValue:   actual,
-			ExpectedValue: expected,
-			TestLine:      line,
-			filePath:      filePath,
-		}
-		OutputString := fmt.Sprintf("%sTest Failed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorRed, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
-		fmt.Println(OutputString)
 		return false
 	}
 }
 
 func TestDifferent(actual interface{}, expected interface{}, request string) bool {
-	_, filePath, line, _ := runtime.Caller(1)
-	if actual != expected {
-		result := output{
-			TestType:      "test for difference",
-			ActualValue:   actual,
-			ExpectedValue: expected,
-			TestLine:      line,
-			filePath:      filePath,
+	if RunTests {
+		_, filePath, line, _ := runtime.Caller(1)
+		if actual != expected {
+			result := output{
+				TestType:      "test for difference",
+				ActualValue:   actual,
+				ExpectedValue: expected,
+				TestLine:      line,
+				filePath:      filePath,
+			}
+			OutputString := fmt.Sprintf("%sTest Passed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorGreen, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
+			fmt.Println(OutputString)
+			return true
+		} else {
+			result := output{
+				TestType:      "test for differences",
+				ActualValue:   actual,
+				ExpectedValue: expected,
+				TestLine:      line,
+				filePath:      filePath,
+			}
+			OutputString := fmt.Sprintf("%sTest Failed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorRed, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
+			fmt.Println(OutputString)
+			return false
 		}
-		OutputString := fmt.Sprintf("%sTest Passed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorGreen, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
-		fmt.Println(OutputString)
-		return true
 	} else {
-		result := output{
-			TestType:      "test for differences",
-			ActualValue:   actual,
-			ExpectedValue: expected,
-			TestLine:      line,
-			filePath:      filePath,
-		}
-		OutputString := fmt.Sprintf("%sTest Failed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorRed, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
-		fmt.Println(OutputString)
 		return false
 	}
 }
 func TestNil(actual interface{}, request string) bool {
-	_, filePath, line, _ := runtime.Caller(1)
-	if actual == nil {
-		result := output{
-			TestType:      "test for Nil return",
-			ActualValue:   actual,
-			ExpectedValue: nil,
-			TestLine:      line,
-			filePath:      filePath,
+	if RunTests {
+		_, filePath, line, _ := runtime.Caller(1)
+		if actual == nil {
+			result := output{
+				TestType:      "test for Nil return",
+				ActualValue:   actual,
+				ExpectedValue: nil,
+				TestLine:      line,
+				filePath:      filePath,
+			}
+			OutputString := fmt.Sprintf("%sTest Passed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorGreen, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
+			fmt.Println(OutputString)
+			return true
+		} else {
+			result := output{
+				TestType:      "test for nil return",
+				ActualValue:   actual,
+				ExpectedValue: nil,
+				TestLine:      line,
+				filePath:      filePath,
+			}
+			OutputString := fmt.Sprintf("%sTest Failed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorRed, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
+			fmt.Println(OutputString)
+			return true
 		}
-		OutputString := fmt.Sprintf("%sTest Passed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorGreen, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
-		fmt.Println(OutputString)
-		return true
 	} else {
-		result := output{
-			TestType:      "test for nil return",
-			ActualValue:   actual,
-			ExpectedValue: nil,
-			TestLine:      line,
-			filePath:      filePath,
-		}
-		OutputString := fmt.Sprintf("%sTest Failed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorRed, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
-		fmt.Println(OutputString)
-		return true
+		return false
 	}
 }
 func TestNotNil(actual interface{}, request string) bool {
-	_, filePath, line, _ := runtime.Caller(1)
-	if actual != nil {
-		result := output{
-			TestType:      "test for not nill",
-			ActualValue:   actual,
-			ExpectedValue: "not nil",
-			TestLine:      line,
-			filePath:      filePath,
+	if RunTests {
+		_, filePath, line, _ := runtime.Caller(1)
+		if actual != nil {
+			result := output{
+				TestType:      "test for not nill",
+				ActualValue:   actual,
+				ExpectedValue: "not nil",
+				TestLine:      line,
+				filePath:      filePath,
+			}
+			OutputString := fmt.Sprintf("%sTest Passed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorGreen, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
+			fmt.Println(OutputString)
+			return true
+		} else {
+			result := output{
+				TestType:      "test for not nill",
+				ActualValue:   actual,
+				ExpectedValue: "not nil",
+				TestLine:      line,
+				filePath:      filePath,
+			}
+			OutputString := fmt.Sprintf("%sTest Failed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorRed, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
+			fmt.Println(OutputString)
+			return true
 		}
-		OutputString := fmt.Sprintf("%sTest Passed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorGreen, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
-		fmt.Println(OutputString)
-		return true
 	} else {
-		result := output{
-			TestType:      "test for not nill",
-			ActualValue:   actual,
-			ExpectedValue: "not nil",
-			TestLine:      line,
-			filePath:      filePath,
-		}
-		OutputString := fmt.Sprintf("%sTest Failed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorRed, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
-		fmt.Println(OutputString)
-		return true
+		return false
 	}
 }
 func TestCheckReturnType(actual interface{}, expected interface{}, request string) bool {
-	_, filePath, line, _ := runtime.Caller(1)
-	if reflect.TypeOf(actual).String() == expected {
-		result := output{
-			TestType:      "test for matching return types",
-			ActualValue:   reflect.TypeOf(actual).String(),
-			ExpectedValue: expected,
-			TestLine:      line,
-			filePath:      filePath,
+	if RunTests {
+		_, filePath, line, _ := runtime.Caller(1)
+		if reflect.TypeOf(actual).String() == expected {
+			result := output{
+				TestType:      "test for matching return types",
+				ActualValue:   reflect.TypeOf(actual).String(),
+				ExpectedValue: expected,
+				TestLine:      line,
+				filePath:      filePath,
+			}
+			OutputString := fmt.Sprintf("%sTest Passed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorGreen, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
+			fmt.Println(OutputString)
+			return true
+		} else {
+			result := output{
+				TestType:      "test for matching return types",
+				ActualValue:   reflect.TypeOf(actual).String(),
+				ExpectedValue: expected,
+				TestLine:      line,
+				filePath:      filePath,
+			}
+			OutputString := fmt.Sprintf("%sTest Failed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorRed, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
+			fmt.Println(OutputString)
+			return false
 		}
-		OutputString := fmt.Sprintf("%sTest Passed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorGreen, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
-		fmt.Println(OutputString)
-		return true
 	} else {
-		result := output{
-			TestType:      "test for matching return types",
-			ActualValue:   reflect.TypeOf(actual).String(),
-			ExpectedValue: expected,
-			TestLine:      line,
-			filePath:      filePath,
-		}
-		OutputString := fmt.Sprintf("%sTest Failed%s\nTest Type: %s\nActual: %v\nExpected: %v\nLine: %d::%s", ColorRed, ColorReset, result.TestType, result.ActualValue, result.ExpectedValue, result.TestLine, result.filePath)
-		fmt.Println(OutputString)
 		return false
 	}
 }
