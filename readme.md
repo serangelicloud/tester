@@ -24,6 +24,12 @@ First of all at the beginning of your code set `RunTests` as true
 tester.RunTests = true
 ```
 This will enamble the test execution in your code and communicate to the testing file that it can run tests
+
+### showing output
+The package on default doesn't show any output when tests are ran unless they fail. To show concise output set `tester.ShowOutput` as true. This will print test passed for any test that is passed and it will print test failed for any failed test alongside the test details in order to identify it.
+
+To show details about passed tests too set `tester.ShowDetailedPassed` as true.
+
 ### Writing a test
 ### Running a Test
 
@@ -47,3 +53,9 @@ All this tests will produce an output like this
 **Expected:** Represents the expected value that the test was intended to match or verify. It serves as a reference point for evaluating the correctness of the operation.
 
 **Line:** Specifies the line number and path within the source code where the test function was called. This information aids in identifying the exact location of the test within the codebase.
+
+### printing final test results
+To print the number of failed and passed tests in your main file write 
+```go
+    tester.PrintExecutedTests()
+```
